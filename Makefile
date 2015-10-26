@@ -181,6 +181,51 @@ objcguide.asciidoc: objcguide.html
 	sed -e 's|\(link:#[a-z-]*\)--\([a-z_/]*\[\)|\1-\2|g' objcguide.asciidoc > objcguide.asciidoc.tmp && mv objcguide.asciidoc.tmp objcguide.asciidoc
 	sed -e 's|\(link:#[a-z-]*\)--\([a-z_/]*\[\)|\1-\2|g' objcguide.asciidoc > objcguide.asciidoc.tmp && mv objcguide.asciidoc.tmp objcguide.asciidoc
 
+
+jsoncstyleguide.html: jsoncstyleguide.xml Makefile
+# fix CUSTOM XSL TAGS
+	xsltproc styleguide.xsl jsoncstyleguide.xml > jsoncstyleguide.html
+# fix table parsing bug
+	sed -e 's/<th/<td/g' jsoncstyleguide.html > jsoncstyleguide.html.tmp && mv jsoncstyleguide.html.tmp jsoncstyleguide.html
+	sed -e 's,</th,</td,g' jsoncstyleguide.html > jsoncstyleguide.html.tmp && mv jsoncstyleguide.html.tmp jsoncstyleguide.html
+
+
+jsoncstyleguide.asciidoc: jsoncstyleguide.html
+	pandoc --atx-headers --no-wrap -f html -t asciidoc jsoncstyleguide.html > $@
+
+#  fix css classes breaking asciidoc
+	sed -e 's/[ ]*code,badcode//g' jsoncstyleguide.asciidoc > jsoncstyleguide.asciidoc.tmp && mv jsoncstyleguide.asciidoc.tmp jsoncstyleguide.asciidoc
+# Fix missing empty line before list
+	perl -p -e 's/^\*/\n*/' jsoncstyleguide.asciidoc  > jsoncstyleguide.asciidoc.tmp && mv jsoncstyleguide.asciidoc.tmp jsoncstyleguide.asciidoc
+	sed -e 's/^.*▶.*$$//g' jsoncstyleguide.asciidoc > jsoncstyleguide.asciidoc.tmp && mv jsoncstyleguide.asciidoc.tmp jsoncstyleguide.asciidoc
+# lowercase links
+	sed -e 's|\(link:#\)\([a-zA-Z0-9&%_/.]*\)\(\[\)|\1\L\2\E\3|g' jsoncstyleguide.asciidoc > jsoncstyleguide.asciidoc.tmp && mv jsoncstyleguide.asciidoc.tmp jsoncstyleguide.asciidoc
+# links with []
+	sed -e 's|\(link:#[a-z0-9_.]*\)%5b%5d\([a-z0-9_/.]*\[\)|\1\2|g' jsoncstyleguide.asciidoc > jsoncstyleguide.asciidoc.tmp && mv jsoncstyleguide.asciidoc.tmp jsoncstyleguide.asciidoc
+	sed -e 's|\[error.errors\[\]|\[error.errors\[\\\]|g' jsoncstyleguide.asciidoc > jsoncstyleguide.asciidoc.tmp && mv jsoncstyleguide.asciidoc.tmp jsoncstyleguide.asciidoc
+# slashes and underscores to dashes
+	sed -e 's|\(link:#[a-z0-9/_-]*\):\([a-z0-9_/.-]*\[\)|\1-\2|g' jsoncstyleguide.asciidoc > jsoncstyleguide.asciidoc.tmp && mv jsoncstyleguide.asciidoc.tmp jsoncstyleguide.asciidoc
+	sed -e 's|\(link:#[a-z0-9/_-]*\)&\([a-z0-9_/.-]*\[\)|\1-\2|g' jsoncstyleguide.asciidoc > jsoncstyleguide.asciidoc.tmp && mv jsoncstyleguide.asciidoc.tmp jsoncstyleguide.asciidoc
+	sed -e 's|\(link:#[a-z0-9/_-]*\)\.\([a-z0-9_/.-]*\[\)|\1-\2|g' jsoncstyleguide.asciidoc > jsoncstyleguide.asciidoc.tmp && mv jsoncstyleguide.asciidoc.tmp jsoncstyleguide.asciidoc
+	sed -e 's|\(link:#[a-z0-9/_-]*\)\.\([a-z0-9_/.-]*\[\)|\1-\2|g' jsoncstyleguide.asciidoc > jsoncstyleguide.asciidoc.tmp && mv jsoncstyleguide.asciidoc.tmp jsoncstyleguide.asciidoc
+	sed -e 's|\(link:#[a-z0-9/_-]*\)\.\([a-z0-9_/.-]*\[\)|\1-\2|g' jsoncstyleguide.asciidoc > jsoncstyleguide.asciidoc.tmp && mv jsoncstyleguide.asciidoc.tmp jsoncstyleguide.asciidoc
+	sed -e 's|\(link:#[a-z0-9_-]*\)/\([a-z0-9_/.-]*\[\)|\1-\2|g' jsoncstyleguide.asciidoc > jsoncstyleguide.asciidoc.tmp && mv jsoncstyleguide.asciidoc.tmp jsoncstyleguide.asciidoc
+	sed -e 's|\(link:#[a-z0-9_-]*\)/\([a-z0-9_/.-]*\[\)|\1-\2|g' jsoncstyleguide.asciidoc > jsoncstyleguide.asciidoc.tmp && mv jsoncstyleguide.asciidoc.tmp jsoncstyleguide.asciidoc
+	sed -e 's|\(link:#[a-z0-9_-]*\)/\([a-z0-9_/.-]*\[\)|\1-\2|g' jsoncstyleguide.asciidoc > jsoncstyleguide.asciidoc.tmp && mv jsoncstyleguide.asciidoc.tmp jsoncstyleguide.asciidoc
+	sed -e 's|\(link:#[a-z0-9-]*\)_\([a-z0-9_/-]*\[\)|\1-\2|g' jsoncstyleguide.asciidoc > jsoncstyleguide.asciidoc.tmp && mv jsoncstyleguide.asciidoc.tmp jsoncstyleguide.asciidoc
+	sed -e 's|\(link:#[a-z0-9-]*\)_\([a-z0-9_/-]*\[\)|\1-\2|g' jsoncstyleguide.asciidoc > jsoncstyleguide.asciidoc.tmp && mv jsoncstyleguide.asciidoc.tmp jsoncstyleguide.asciidoc
+	sed -e 's|\(link:#[a-z0-9-]*\)_\([a-z0-9_/-]*\[\)|\1-\2|g' jsoncstyleguide.asciidoc > jsoncstyleguide.asciidoc.tmp && mv jsoncstyleguide.asciidoc.tmp jsoncstyleguide.asciidoc
+	sed -e 's|\(link:#[a-z0-9-]*\)_\([a-z0-9_/-]*\[\)|\1-\2|g' jsoncstyleguide.asciidoc > jsoncstyleguide.asciidoc.tmp && mv jsoncstyleguide.asciidoc.tmp jsoncstyleguide.asciidoc
+	sed -e 's|\(link:#[a-z0-9-]*\)_\([a-z0-9_/-]*\[\)|\1-\2|g' jsoncstyleguide.asciidoc > jsoncstyleguide.asciidoc.tmp && mv jsoncstyleguide.asciidoc.tmp jsoncstyleguide.asciidoc
+	sed -e 's|\(link:#[a-z0-9-]*\)\.\([a-z0-9_/]*\[\)|\1-\2|g' jsoncstyleguide.asciidoc > jsoncstyleguide.asciidoc.tmp && mv jsoncstyleguide.asciidoc.tmp jsoncstyleguide.asciidoc
+	sed -e 's|\(link:#[a-z0-9-]*\)_\([a-z0-9_/]*\[\)|\1-\2|g' jsoncstyleguide.asciidoc > jsoncstyleguide.asciidoc.tmp && mv jsoncstyleguide.asciidoc.tmp jsoncstyleguide.asciidoc
+	sed -e 's|\(link:#[a-z0-9-]*\)--\([a-z0-9_/-]*\[\)|\1-\2|g' jsoncstyleguide.asciidoc > jsoncstyleguide.asciidoc.tmp && mv jsoncstyleguide.asciidoc.tmp jsoncstyleguide.asciidoc
+	sed -e 's|\(link:#[a-z0-9-]*\)--\([a-z0-9_/-]*\[\)|\1-\2|g' jsoncstyleguide.asciidoc > jsoncstyleguide.asciidoc.tmp && mv jsoncstyleguide.asciidoc.tmp jsoncstyleguide.asciidoc
+	sed -e 's|\(link:#[a-z0-9-]*\)--\([a-z0-9_/-]*\[\)|\1-\2|g' jsoncstyleguide.asciidoc > jsoncstyleguide.asciidoc.tmp && mv jsoncstyleguide.asciidoc.tmp jsoncstyleguide.asciidoc
+# bad anchor
+	sed -e 's|_&_|_|g' jsoncstyleguide.asciidoc > jsoncstyleguide.asciidoc.tmp && mv jsoncstyleguide.asciidoc.tmp jsoncstyleguide.asciidoc
+
+
 htmlcssguide.html: htmlcssguide.xml Makefile
 # fix CUSTOM XSL TAGS
 	xsltproc styleguide.xsl htmlcssguide.xml > htmlcssguide.html
@@ -225,13 +270,15 @@ vimscriptfull.asciidoc: vimscriptfull.html
 	perl -p -e 's/^\*/\n*/' vimscriptfull.asciidoc  > vimscriptfull.asciidoc.tmp && mv vimscriptfull.asciidoc.tmp vimscriptfull.asciidoc
 	sed -e 's/^.*▶.*$$//g' vimscriptfull.asciidoc > vimscriptfull.asciidoc.tmp && mv vimscriptfull.asciidoc.tmp vimscriptfull.asciidoc
 # lowercase links
-	sed -e 's|\(link:#\)\([a-zA-Z_/]*\)\(\[\)|\1\L\2\E\3|g' vimscriptfull.asciidoc > vimscriptfull.asciidoc.tmp && mv vimscriptfull.asciidoc.tmp vimscriptfull.asciidoc
+	sed -e 's|\(link:#\)\([a-zA-Z_./]*\)\(\[\)|\1\L\2\E\3|g' vimscriptfull.asciidoc > vimscriptfull.asciidoc.tmp && mv vimscriptfull.asciidoc.tmp vimscriptfull.asciidoc
 # slashes and underscores to dashes
+	sed -e 's|\(link:#[a-z_-]*\)\.\([a-z_/-]*\[\)|\1-\2|g' vimscriptfull.asciidoc > vimscriptfull.asciidoc.tmp && mv vimscriptfull.asciidoc.tmp vimscriptfull.asciidoc
 	sed -e 's|\(link:#[a-z-]*\)/\([a-z_/]*\[\)|\1-\2|g' vimscriptfull.asciidoc > vimscriptfull.asciidoc.tmp && mv vimscriptfull.asciidoc.tmp vimscriptfull.asciidoc
 	sed -e 's|\(link:#[a-z-]*\)/\([a-z_/]*\[\)|\1-\2|g' vimscriptfull.asciidoc > vimscriptfull.asciidoc.tmp && mv vimscriptfull.asciidoc.tmp vimscriptfull.asciidoc
-	sed -e 's|\(link:#[a-z-]*\)_\([a-z_/]*\[\)|\1-\2|g' vimscriptfull.asciidoc > vimscriptfull.asciidoc.tmp && mv vimscriptfull.asciidoc.tmp vimscriptfull.asciidoc
-	sed -e 's|\(link:#[a-z-]*\)_\([a-z_/]*\[\)|\1-\2|g' vimscriptfull.asciidoc > vimscriptfull.asciidoc.tmp && mv vimscriptfull.asciidoc.tmp vimscriptfull.asciidoc
-	sed -e 's|\(link:#[a-z-]*\)_\([a-z_/]*\[\)|\1-\2|g' vimscriptfull.asciidoc > vimscriptfull.asciidoc.tmp && mv vimscriptfull.asciidoc.tmp vimscriptfull.asciidoc
+	sed -e 's|\(link:#[a-z-]*\)_\([a-z_/-]*\[\)|\1-\2|g' vimscriptfull.asciidoc > vimscriptfull.asciidoc.tmp && mv vimscriptfull.asciidoc.tmp vimscriptfull.asciidoc
+	sed -e 's|\(link:#[a-z-]*\)_\([a-z_/-]*\[\)|\1-\2|g' vimscriptfull.asciidoc > vimscriptfull.asciidoc.tmp && mv vimscriptfull.asciidoc.tmp vimscriptfull.asciidoc
+	sed -e 's|\(link:#[a-z-]*\)_\([a-z_/-]*\[\)|\1-\2|g' vimscriptfull.asciidoc > vimscriptfull.asciidoc.tmp && mv vimscriptfull.asciidoc.tmp vimscriptfull.asciidoc
+	sed -e 's|\(link:#[a-z-]*\)--\([a-z_/-]*\[\)|\1-\2|g' vimscriptfull.asciidoc > vimscriptfull.asciidoc.tmp && mv vimscriptfull.asciidoc.tmp vimscriptfull.asciidoc
 
 vimscriptguide.html: vimscriptguide.xml Makefile
 # fix CUSTOM XSL TAGS
@@ -294,7 +341,7 @@ angularjs-google-style.asciidoc: angularjs-google-style.html
 	sed -e 's/code,prettyprint//g' angularjs-google-style.asciidoc > angularjs-google-style.asciidoc.tmp && mv angularjs-google-style.asciidoc.tmp angularjs-google-style.asciidoc
 
 
-xmlstyle.asciidoc: xmlstyle.html
+xmlstyle.html.tmp: xmlstyle.html Makefile
 
 	sed -e 's,C++,{cpp},g' xmlstyle.html > xmlstyle.html.tmp
 # fix missing newlines
@@ -303,9 +350,12 @@ xmlstyle.asciidoc: xmlstyle.html
 	sed -e 's,\(<h[0-9]>\)*[0-9]*\. ,\1,g' xmlstyle.html.tmp > xmlstyle.html.tmp2 && mv xmlstyle.html.tmp2 xmlstyle.html.tmp
 	sed -e 's,>_,,g' xmlstyle.html.tmp > xmlstyle.html.tmp2 && mv xmlstyle.html.tmp2 xmlstyle.html.tmp
 
+
+xmlstyle.asciidoc: xmlstyle.html.tmp
 	pandoc --atx-headers --no-wrap -f html -t asciidoc xmlstyle.html.tmp > xmlstyle.asciidoc
 
 	sed -e 's/code,badcode//g' xmlstyle.asciidoc > xmlstyle.asciidoc.tmp && mv xmlstyle.asciidoc.tmp xmlstyle.asciidoc
+
 
 # Generic patterns, html favored
 %.asciidoc: %.html
