@@ -1,2 +1,2 @@
-include: [javaguide.asciidoc, pyguide.asciidoc]
-exclude: [cpplint]
+include: [javaguide.md, pyguide.asciidoc, cppguide.md]
+exclude: [cppguide.html, cppguide.html.tmp]

@@ -42,11 +42,13 @@ clean:
 
 cppguide.html.tmp: cppguide.html Makefile
 # fix C++ breaking asciidoc
-	sed -e 's,C++,{cpp},g' cppguide.html > cppguide.html.tmp
+#	sed -e 's,C++,{cpp},g' cppguide.html > cppguide.html.tmp
 # fix bad table parsing pandoc bug
-	sed -e 's/<tbody>//g' cppguide.html.tmp > cppguide.html.tmp2 && mv cppguide.html.tmp2 cppguide.html.tmp
+	sed -e 's/<tbody>//g' cppguide.html > cppguide.html.tmp
 	sed -e 's,</tbody>,,g' cppguide.html.tmp > cppguide.html.tmp2 && mv cppguide.html.tmp2 cppguide.html.tmp
 
+cppguide.md: cppguide.html.tmp
+	pandoc --atx-headers --no-wrap -f html -t markdown_github cppguide.html.tmp > $@
 
 cppguide.asciidoc: cppguide.html.tmp
 	pandoc --atx-headers --no-wrap -f html -t asciidoc cppguide.html.tmp > $@
@@ -64,7 +66,6 @@ javaguide.html.tmp: javaguide.html Makefile
 	sed -e 's/<tbody>//g' javaguide.html > javaguide.html.tmp
 	sed -e 's,</tbody>,,g' javaguide.html.tmp > javaguide.html.tmp2 && mv javaguide.html.tmp2 javaguide.html.tmp
 
-
 javaguide.asciidoc: javaguide.html.tmp
 	pandoc --atx-headers --no-wrap -f html -t asciidoc javaguide.html.tmp > $@
 # remove javaguidelink.png
@@ -75,6 +76,9 @@ javaguide.asciidoc: javaguide.html.tmp
 	perl -p -e 's/^\*\n/* /' javaguide.asciidoc  > javaguide.asciidoc.tmp && mv javaguide.asciidoc.tmp javaguide.asciidoc
 # fix link anchors !! non-standard underscore !!
 	sed -e 's|\(.*\) link:#\([0-9a-z.-]*\)|\[\[\2\]\]\n\1|g' javaguide.asciidoc > javaguide.asciidoc.tmp && mv javaguide.asciidoc.tmp javaguide.asciidoc
+
+javaguide.md: javaguide.html.tmp
+	pandoc --atx-headers --no-wrap -f html -t markdown_github javaguide.html.tmp > $@
 
 
 shell.html: shell.xml Makefile
