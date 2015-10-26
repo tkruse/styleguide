@@ -1,0 +1,2 @@
+include: [javaguide.asciidoc, pyguide.asciidoc]
+exclude: [cpplint]
