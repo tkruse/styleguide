@@ -1,3 +1,7 @@
+---
+---
+:cpp: C++
+
 # Google {cpp} Style Guide
 
 ## Background
