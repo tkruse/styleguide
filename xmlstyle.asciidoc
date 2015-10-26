@@ -1,5 +1,6 @@
 = Google XML Document Format Style Guide
 
+:sectlinks:
 
 Version 1.0 Copyright Google 2008
 

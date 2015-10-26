@@ -1,6 +1,7 @@
 :cpp: C++
 
 = Google {cpp} Style Guide
+:sectlinks:
 
 [[Background]]
 == Background

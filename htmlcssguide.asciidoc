@@ -1,5 +1,6 @@
 = Google HTML/CSS Style Guide
 
+:sectlinks:
 
 Revision 2.23
 
