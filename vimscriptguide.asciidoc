@@ -1,5 +1,6 @@
 = Google Vimscript Style Guide
 
+:sectlinks:
 
 Revision 1.1
 

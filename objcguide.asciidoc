@@ -1,5 +1,6 @@
 = Google Objective-C Style Guide
 
+:sectlinks:
 
 Revision 2.59
 

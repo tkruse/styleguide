@@ -1,5 +1,6 @@
 = Google JavaScript Style Guide
 
+:sectlinks:
 
 Revision 2.93
 

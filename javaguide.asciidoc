@@ -1,6 +1,5 @@
 = Google Java Style
 
-
 Last changed: March 21, 2014
 
 [width="100%",cols="34%,33%,33%",]

@@ -1,4 +1,5 @@
 = An AngularJS Style Guide for Closure Users at Google
+:sectlinks:
 
 
 This is the external version of a document that was primarily written for Google engineers. It describes a recommended style for AngularJS apps that use Closure, as used internally at Google. Members of the broader AngularJS community should feel free to apply (or not apply) these recommendations, as relevant to their own use cases.

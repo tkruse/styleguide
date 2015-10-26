@@ -1,4 +1,5 @@
 = Google Python Style Guide
+:sectlinks:
 
 Revision 2.59
 

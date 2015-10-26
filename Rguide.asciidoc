@@ -1,4 +1,5 @@
 = Google's R Style Guide
+:sectlinks:
 
 
 R is a high-level programming language used primarily for statistical computing and graphics. The goal of the R Programming Style Guide is to make our R code easier to read, share, and verify. The rules below were designed in collaboration with the entire R user community at Google.
