@@ -46,18 +46,21 @@ import unittest
 import cpplint
 
 try:
-  xrange
+  xrange(1, 0)
 except NameError:
+  #  -- pylint: disable=redefined-builtin
   xrange = range
 
 try:
   unicode
 except NameError:
+  #  -- pylint: disable=redefined-builtin
   basestring = unicode = str
 
 try:
   long(2)
 except NameError:
+  #  -- pylint: disable=redefined-builtin
   long = int
 
 def unicode_escape_decode(x):

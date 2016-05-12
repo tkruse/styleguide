@@ -544,26 +544,30 @@ _line_length = 80
 try:
   xrange(1, 0)
 except NameError:
+  #  -- pylint: disable=redefined-builtin
   xrange = range
 
 try:
   unicode
 except NameError:
+  #  -- pylint: disable=redefined-builtin
   basestring = unicode = str
 
 try:
   long(2)
 except NameError:
+  #  -- pylint: disable=redefined-builtin
   long = int
 
 if sys.version_info < (3,):
-    # BINARY_TYPE = str
-    itervalues = dict.itervalues
-    iteritems = dict.iteritems
+  #  -- pylint: disable=no-member
+  # BINARY_TYPE = str
+  itervalues = dict.itervalues
+  iteritems = dict.iteritems
 else:
-    # BINARY_TYPE = bytes
-    itervalues = dict.values
-    iteritems = dict.items
+  # BINARY_TYPE = bytes
+  itervalues = dict.values
+  iteritems = dict.items
 
 def unicode_escape_decode(x):
   if sys.version_info < (3,):
