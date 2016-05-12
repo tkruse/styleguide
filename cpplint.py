@@ -6226,8 +6226,8 @@ def ProcessConfigOverrides(filename):
 
   # Apply all the accumulated filters in reverse order (top-level directory
   # config options having the least priority).
-  for filter in reversed(cfg_filters):
-     _AddFilters(filter)
+  for cfg_filter in reversed(cfg_filters):
+     _AddFilters(cfg_filter)
 
   return True
 
